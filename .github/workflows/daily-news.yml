@@ -2,7 +2,8 @@ name: 매일 경제뉴스 발송
 
 on:
   schedule:
-    - cron: '30 22 * * 1-5'  # 평일 오전 7:30 KST (UTC+9)
+    - cron: '30 22 * * 0-5'  # 월~토 오전 7:30 KST (UTC 전날 22:30, 일~금)
+    - cron: '40 6 * * 1-5'   # 월~금 오후 3:40 KST (UTC 당일 06:40)
   workflow_dispatch:          # 수동 실행 버튼
 
 jobs:
