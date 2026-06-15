@@ -1,0 +1,26 @@
+name: 매일 경제뉴스 발송
+
+on:
+  schedule:
+    - cron: '30 22 * * 1-5'  # 평일 오전 7:30 KST (UTC+9)
+  workflow_dispatch:          # 수동 실행 버튼
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 코드 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Python 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 메일 발송
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PW: ${{ secrets.GMAIL_APP_PW }}
+          TO_ADDRESS: ${{ secrets.TO_ADDRESS }}
+        run: python daily_economic_news.py
