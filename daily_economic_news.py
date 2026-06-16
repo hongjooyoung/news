@@ -89,16 +89,16 @@ def build_stock_html() -> str:
             change     = nums[1] if len(nums) > 1 else '-'
             prev_close = nums[2] if len(nums) > 2 else '-'
             day_high   = nums[3] if len(nums) > 3 else '-'
-            day_low    = nums[4] if len(nums) > 4 else '-'
-            open_      = nums[7] if len(nums) > 7 else '-'
+            open_      = nums[6] if len(nums) > 6 else '-'
+            day_low    = nums[7] if len(nums) > 7 else '-'
 
             p  = int(price.replace(',', '')) if price != '-' else 0
             pc = int(prev_close.replace(',', '')) if prev_close != '-' else 0
             c  = int(change.replace(',', '')) if change != '-' else 0
             if p < pc:
-                sign, pct, color = '▼', f'-{c/pc*100:.2f}%' if pc else '-', '#e53935'
+                sign, pct, color = '▼', f'-{c/pc*100:.2f}%' if pc else '-', '#1a73e8'
             elif p > pc:
-                sign, pct, color = '▲', f'+{c/pc*100:.2f}%' if pc else '-', '#1a73e8'
+                sign, pct, color = '▲', f'+{c/pc*100:.2f}%' if pc else '-', '#e53935'
             else:
                 sign, pct, color = '-', '0.00%', '#888'
 
@@ -139,8 +139,8 @@ def build_stock_html() -> str:
             <td style="padding:8px 10px;text-align:right;color:#555;font-size:12px;">
               전일 {prev_close}원<br>시가 {open_}원</td>
             <td style="padding:8px 10px;text-align:right;font-size:12px;">
-              <span style="color:#e53935;">▲ {day_high}원</span><br>
-              <span style="color:#1a73e8;">▼ {day_low}원</span></td>
+              <span style="color:#e53935;">{day_high}원</span><br>
+              <span style="color:#1a73e8;">{day_low}원</span></td>
             <td style="padding:8px 10px;text-align:right;font-size:11px;color:#555;">
               <div style="color:#e53935;">{w52_hi}</div>
               <div style="margin:4px 0;background:#eee;border-radius:3px;height:5px;position:relative;">
